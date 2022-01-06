@@ -1,12 +1,26 @@
 const libContainer = document.querySelector('.lib-container');
+const addBookBtn = document.querySelector('.add-book');
+let modal = document.getElementById("myModal");
+let span = document.getElementsByClassName("close")[0];
 let myLibrary = [];
+
+addBookBtn.addEventListener("click", addBookToLibrary);
+span.onclick = function() {
+    modal.style.display = "none";
+}
 
 // Test Code
 let someBook = new Book('Dune', 'Frank Herbert', 500, 'Read');
 let someBook2 = new Book('Children of Dune', 'Frank Herbert', 501, 'Not Read');
-addBookToLibrary(someBook);
-addBookToLibrary(someBook2);
+addBook(someBook);
+addBook(someBook2);
 bookDisplay();
+
+function addBook(newBook) {
+    // console.log("Adding a book...")
+    
+    myLibrary.push(newBook);
+}
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -19,8 +33,10 @@ function Book(title, author, pages, read) {
     }
 }
 
-function addBookToLibrary(newBook) {
-    myLibrary.push(newBook);
+function addBookToLibrary() {
+    console.log("Adding a book...")
+    modal.style.display = "block";
+    //myLibrary.push(newBook);
 }
 
 function bookDisplay() {
