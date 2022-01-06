@@ -30,7 +30,7 @@ submitBtn.onclick = function() {
 
 function addBook(newBook) {
     myLibrary.push(newBook);
-    bookDisplay();
+    addNewBookDisplay();
 }
 
 function Book(title, author, pages, read) {
@@ -38,6 +38,7 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages; 
     this.read = read;
+    this.arrInd = myLibrary.length;
     this.info = function () {
         return title + " by " + author + ", " + pages 
         + " pages, " + read;
@@ -50,10 +51,34 @@ function addBookToLibrary() {
 }
 
 function bookDisplay() {
+    libContainer.innerHTML="";
+    myLibrary.forEach(x => {
+        let bookCard = document.createElement('div');
+        bookCard.className = "book-card";
+        let bookTitle = document.createElement('h2');
+        bookTitle.innerText = x.title;
+        let bookAuthor = document.createElement('p');
+        bookAuthor.innerText = x.author;
+        let bookPages = document.createElement('p');
+        bookPages.innerText = x.pages;
+        let bookRead = document.createElement('button');
+        bookRead.innerText = x.read;
+        bookRead.addEventListener('click', changeReadStatus);
+        let bookDelete = document.createElement('button');
+        
+        bookDelete.innerText = 'Remove book';
+        bookCard.value = x.arrInd;
+
+        bookCard.append(bookTitle, bookAuthor, bookPages, bookRead, bookDelete);
+        libContainer.appendChild(bookCard);
+    });
+}
+
+function addNewBookDisplay() {
     let x = myLibrary[myLibrary.length - 1];
     let bookCard = document.createElement('div');
     bookCard.className = "book-card";
-    let bookTitle = document.createElement('h3');
+    let bookTitle = document.createElement('h2');
     bookTitle.innerText = x.title;
     let bookAuthor = document.createElement('p');
     bookAuthor.innerText = x.author;
@@ -61,7 +86,20 @@ function bookDisplay() {
     bookPages.innerText = x.pages;
     let bookRead = document.createElement('button');
     bookRead.innerText = x.read;
+    bookRead.addEventListener('click', changeReadStatus);
+    let bookDelete = document.createElement('button');
+
+    bookDelete.innerText = 'Remove book';
+    bookCard.value = x.arrInd;
     
-    bookCard.append(bookTitle, bookAuthor, bookPages, bookRead);
+    bookCard.append(bookTitle, bookAuthor, bookPages, bookRead, bookDelete);
     libContainer.appendChild(bookCard);
+}
+
+function changeReadStatus(e) {
+    console.log(e.target.parentElement);
+    console.log(e.target.parentElement.value);
+    let bookInd = e.target.parentElement.value;
+    myLibrary[bookInd].read = myLibrary[bookInd].read === "Read" ? "Not Read" : "Read";
+    bookDisplay();
 }
