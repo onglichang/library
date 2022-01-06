@@ -3,7 +3,7 @@ let myLibrary = [];
 
 // Test Code
 let someBook = new Book('Dune', 'Frank Herbert', 500, 'Read');
-let someBook2 = new Book('Dune2', 'Frank Herbert', 501, 'Not Read');
+let someBook2 = new Book('Children of Dune', 'Frank Herbert', 501, 'Not Read');
 addBookToLibrary(someBook);
 addBookToLibrary(someBook2);
 bookDisplay();
@@ -26,7 +26,8 @@ function addBookToLibrary(newBook) {
 function bookDisplay() {
     myLibrary.forEach(x => {
         let bookCard = document.createElement('div');
-        let bookTitle = document.createElement('p');
+        bookCard.className = "book-card";
+        let bookTitle = document.createElement('h3');
         bookTitle.innerText = x.title;
         let bookAuthor = document.createElement('p');
         bookAuthor.innerText = x.author;
