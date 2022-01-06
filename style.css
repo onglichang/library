@@ -84,6 +84,10 @@ body {
 /* Modal Body */
 .modal-body {
   padding: 2px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 10px;
 }
 
 .book-form {
@@ -91,6 +95,11 @@ body {
   flex-direction: column;
   gap: 5px;
   margin: 10px;
+}
+
+.read-div {
+  text-align: center;
+  font-size: 18px;
 }
 
 /* Modal Footer */

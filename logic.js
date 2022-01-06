@@ -2,24 +2,35 @@ const libContainer = document.querySelector('.lib-container');
 const addBookBtn = document.querySelector('.add-book');
 let modal = document.getElementById("myModal");
 let span = document.getElementsByClassName("close")[0];
+let submitBtn = document.getElementById("submit-btn");
 let myLibrary = [];
 
-addBookBtn.addEventListener("click", addBookToLibrary);
+addBookBtn.onclick = function() {
+    modal.style.display = "block";
+}
+
 span.onclick = function() {
     modal.style.display = "none";
 }
 
-// Test Code
-let someBook = new Book('Dune', 'Frank Herbert', 500, 'Read');
-let someBook2 = new Book('Children of Dune', 'Frank Herbert', 501, 'Not Read');
-addBook(someBook);
-addBook(someBook2);
-bookDisplay();
+submitBtn.onclick = function() {
+    let title = document.getElementById("title-input").value;
+    let author = document.getElementById("author-input").value;
+    let pages = document.getElementById("pages-input").value;
+    let read = document.getElementById("read-check").checked === true ? 'Read' : 'Not Read';
+    let newBook = new Book(title, author, pages, read);
+    addBook(newBook);
+
+    document.getElementById("title-input").value = '';
+    document.getElementById("author-input").value = '';
+    document.getElementById("pages-input").value = '';
+    document.getElementById("read-check").checked= false;
+    modal.style.display = "none";
+}
 
 function addBook(newBook) {
-    // console.log("Adding a book...")
-    
     myLibrary.push(newBook);
+    bookDisplay();
 }
 
 function Book(title, author, pages, read) {
@@ -34,25 +45,23 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary() {
-    console.log("Adding a book...")
     modal.style.display = "block";
     //myLibrary.push(newBook);
 }
 
 function bookDisplay() {
-    myLibrary.forEach(x => {
-        let bookCard = document.createElement('div');
-        bookCard.className = "book-card";
-        let bookTitle = document.createElement('h3');
-        bookTitle.innerText = x.title;
-        let bookAuthor = document.createElement('p');
-        bookAuthor.innerText = x.author;
-        let bookPages = document.createElement('p');
-        bookPages.innerText = x.pages;
-        let bookRead = document.createElement('button');
-        bookRead.innerText = x.read;
-        
-        bookCard.append(bookTitle, bookAuthor, bookPages, bookRead);
-        libContainer.appendChild(bookCard);
-    })
+    let x = myLibrary[myLibrary.length - 1];
+    let bookCard = document.createElement('div');
+    bookCard.className = "book-card";
+    let bookTitle = document.createElement('h3');
+    bookTitle.innerText = x.title;
+    let bookAuthor = document.createElement('p');
+    bookAuthor.innerText = x.author;
+    let bookPages = document.createElement('p');
+    bookPages.innerText = x.pages;
+    let bookRead = document.createElement('button');
+    bookRead.innerText = x.read;
+    
+    bookCard.append(bookTitle, bookAuthor, bookPages, bookRead);
+    libContainer.appendChild(bookCard);
 }
