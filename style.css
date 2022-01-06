@@ -1,11 +1,27 @@
 body {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center;
+  align-items: center; */
   flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+  height: 60px;
+  padding: 10px;
+}
+
+.add-book {
+  height: 35px;
 }
 
 .lib-container {
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
